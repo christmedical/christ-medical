@@ -1,0 +1,31 @@
+{
+  "name": "christ-medical",
+  "description": "Christ Medical",
+  "main": "main.js",
+  "authors": [
+    "GitHub"
+  ],
+  "license": "CC0-1.0",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial"
+  ],
+  "homepage": "https://github.com/mcelveen/vue-compile",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vue": "^1.0.24",
+    "font-awesome": "fontawesome#^4.6.3",
+    "smoothstate": "^0.7.2",
+    "vuex": "^0.6.3",
+    "Materialize": "materialize#^0.97.6"
+  }
+}

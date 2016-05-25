@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Christ Medical - Home</title>
+    <link rel="stylesheet" href="assets/lib/font-awesome/css/font-awesome.min.css">
+    <script id="w3data" src="core/w3data.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <nav-bar>
+        <nav-btn href="#index">Home</nav-btn>
+        <nav-btn href="#search">Search</nav-btn>
+    </nav-bar>
+    <component :is="activePage"></component>
+</div>
+
+<!-- page templates -->
+
+
+<div id="search" w3-include-html="pages/search.html" style="display: none"></div>
+<div id="patient" w3-include-html="pages/patient.html" style="display: none"></div>
+
+<script>w3IncludeHTML();</script>
+
+<!-- vendor -->
+<script src="assets/lib/vue/dist/vue.js"></script>
+
+<!-- components -->
+<script src="components/nav-btn.js"></script>
+<script src="components/nav-bar.js"></script>
+
+<!-- pages -->
+<script src="pages/search.js"></script>
+<script src="pages/patient.js"></script>
+
+<!-- core -->
+<script src="core/app.js"></script>
+
+</body>
+</html>
