@@ -15,13 +15,15 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, './src'),
-        filename: '[name].js'
+        filename: '[name].bundle.js'
     },
 
     module: {
-        // `loaders` is an array of loaders to use.
-        // here we are only configuring vue-loader
         loaders: [
+            {
+                test: /\.js$/,
+                loader: 'babel'
+            },
             {
                 test: /\.vue$/, // a regex for matching all files that end in `.vue`
                 loader: 'vue'   // loader to use for matched files

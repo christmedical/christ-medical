@@ -2,6 +2,10 @@
  * Created by jameym on 5/25/16.
  */
 
-exports.getPatientTab = function(state) {
-    return state.patientTab
+export const patientTab = function(state) {
+    return state.patientTab;
+}
+
+export const activePage = function(state) {
+    return state.activePage;
 }

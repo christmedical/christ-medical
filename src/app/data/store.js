@@ -1,29 +1,31 @@
 /**
  * Created by jameym on 5/24/16.
  */
+"use strict";
 
-var Vue = require('vue'),
-    Vuex = require('vuex');
+import Vue from 'vue';
+import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-var state = {
+const state = {
     activePage: 'search',
-    patientTab: 'patient-visit'
+    patientTab: 'patient-visit',
+    watchingHash: false
 };
 
-var mutations = {
-    SHOW_PAGE: function (state, page) {
-        state.activePage = page.toLowerCase();
+const mutations = {
+    SHOW_PAGE (state, value) {
+        state.activePage = value.toLowerCase();
     },
-    SET_PATIENT_TAB: function (state, tab) {
-        state.patientTab = tab.toLowerCase();
+    SET_PATIENT_TAB (state, value) {
+        state.patientTab = value.toLowerCase();
+    },
+    SET_WATCHING_HASH (state, value) {
+        state.watchingHash = value;
     }
 };
 
-var store = new Vuex.Store({
-    state: state,
-    mutations: mutations
-});
+const store = new Vuex.Store({ state, mutations });
 
-module.exports = store;
+export default store;

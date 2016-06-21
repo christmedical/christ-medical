@@ -1,30 +1,30 @@
 /**
  * Created by jameym on 5/25/16.
  */
-var Vue = require('vue'),
-    Material = require('vue-material'),
 
-    store = require('./data/store.js'),
-    actions = require('./data/actions.js'),
+"use strict";
 
-    NavBar = require('./components/nav-bar.vue'),
-    NavBtn = require('./components/nav-btn.vue'),
-    AppNav = require('./components/app-nav.vue'),
-    MockUp = require('./components/mock-up.vue'),
-    WorkSpace = require('./components/work-space.vue'),
+import Vue from 'vue';
+import store from './data/store.js';
+import * as actions from './data/actions.js';
+import * as getters from './data/getters.js';
 
-    FollowUps = require('./pages/followups.vue'),
-    Patient = require('./pages/patient.vue'),
-    PatientFollowups = require('./pages/patient-followups.vue')
-    PatientProfile = require('./pages/patient-profile.vue'),
-    PatientTreatments = require('./pages/patient-treatments.vue'),
-    PatientVisit = require('./pages/patient-visit.vue'),
-    Reports = require('./pages/reports.vue'),
-    Search = require('./pages/search.vue'),
-    Settings = require('./pages/settings.vue'),
-    Sync = require('./pages/sync.vue');
+import NavBar from './components/nav-bar.vue';
+import NavBtn from './components/nav-btn.vue';
+import AppNav from './components/app-nav.vue';
+import MockUp from './components/mock-up.vue';
+import WorkSpace from './components/work-space.vue';
 
-Material.regAll(Vue);
+import FollowUps from './pages/followups.vue';
+import Patient from './pages/patient.vue';
+import PatientFollowups from './pages/patient-followups.vue';
+import PatientProfile from './pages/patient-profile.vue';
+import PatientTreatments from './pages/patient-treatments.vue';
+import PatientVisit from './pages/patient-visit.vue';
+import Reports from './pages/reports.vue';
+import Search from './pages/search.vue';
+import Settings from './pages/settings.vue';
+import Sync from './pages/sync.vue';
 
 Vue.component('app-nav', AppNav);
 Vue.component('mock-up', MockUp );
@@ -43,17 +43,11 @@ Vue.component('search', Search);
 Vue.component('settings', Settings);
 Vue.component('sync', Sync);
 
-var app = new Vue({
+export default new Vue({
     el: '#app',
     store: store,
-    vuex: {
-        getters: {
-            activePage: function(state) { return state.activePage }
-        },
-        actions: actions
+    vuex: { getters, actions },
+    ready() {
+        this.startWatchingHash();
     }
 });
-
-app.startWatchingHash();
-
-module.exports = app;

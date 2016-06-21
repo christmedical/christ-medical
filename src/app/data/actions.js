@@ -1,17 +1,21 @@
 /**
  * Created by jameym on 5/25/16.
  */
+'use strict';
 
-exports.startWatchingHash = function(ref) {
-    if(!ref.state.watchingHash) {
+export const startWatchingHash = function({dispatch, state}) {
+    if(!state.watchingHash) {
+        
+        dispatch('SHOW_PAGE', location.hash.replace('#', ''));
+
         window.onhashchange = function () {
-            var newPage = location.hash.replace('#', '');
-            ref.dispatch('SHOW_PAGE', newPage);
+            dispatch('SHOW_PAGE', location.hash.replace('#', ''));
         };
-        ref.state.watchingHash = true;
+        
+        dispatch('SET_WATCHING_HASH', true);
     }
 };
 
-exports.setPatientTab = function(ref, tab) {
-    ref.dispatch('SET_PATIENT_TAB', tab);
+export const setPatientTab = function({dispatch}, value) {
+    dispatch('SET_PATIENT_TAB', value);
 };
