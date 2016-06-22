@@ -9,26 +9,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron/electron-quick-start.git"
+    "url": "git+https://github.com/christmedical/christ-medical.git"
   },
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial"
-  ],
+  "keywords": [],
   "author": "GitHub",
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/electron/electron-quick-start/issues"
+    "url": "https://github.com/christmedical/christ-medical/issues"
   },
   "homepage": "https://github.com/electron/electron-quick-start#readme",
   "devDependencies": {
     "bootstrap-sass": "^3.3.6",
     "bower": "^1.7.9",
     "electron-prebuilt": "^1.1.2",
+    "font-awesome": "^4.6.3",
     "gulp": "^3.9.1",
-    "laravel-elixir": "^6.0.0-2",
+    "laravel-elixir": "^5.0.0",
     "laravel-elixir-vueify": "^1.0.3",
     "vue": "^1.0.24",
     "vue-router": "^0.7.13",

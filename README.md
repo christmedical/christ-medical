@@ -1,6 +1,6 @@
 # Install Steps
-1. npm install
-2. bower install
+1. npm install --global gulp
+2. npm install
 
 
 # To start watching files run:

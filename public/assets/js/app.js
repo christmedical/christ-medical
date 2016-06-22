@@ -14423,6 +14423,8 @@ var mutations = {
     }
 };
 
+// Combine the initial state and the mutations to create a Vuex store.
+// This store can be linked to our app.
 exports.default = new _vuex2.default.Store({
     state: state,
     mutations: mutations
