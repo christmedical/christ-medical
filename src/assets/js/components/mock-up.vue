@@ -18,7 +18,7 @@ module.exports = {
     props: ['src'],
     computed: {
         imageSrc: function() {
-            return 'public/assets/images/' + this.src;
+            return 'assets/images/' + this.src;
         }
     }
 };

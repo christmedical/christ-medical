@@ -3,6 +3,9 @@
 2. npm install
 
 
+# Start local webserver
+gulp serve
+
 # To start watching files run:
 gulp watch
 
