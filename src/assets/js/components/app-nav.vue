@@ -20,7 +20,6 @@
 </template>
 
 <script>
-
 import NavBtn from '../components/nav-btn.vue'
 import getters from '../vuex/getters'
 export default {

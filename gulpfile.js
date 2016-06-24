@@ -10,7 +10,8 @@ elixir.config.publicPath = 'public/assets';
 
 gulp.task('serve', function() {
     return connect.server({
-        root: 'public'
+        root: 'public',
+        fallback: 'public/index.html'
     });
 });
 

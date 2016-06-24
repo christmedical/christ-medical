@@ -27,7 +27,9 @@
     "gulp-connect": "^4.1.0",
     "laravel-elixir": "^5.0.0",
     "laravel-elixir-vueify": "^1.0.3",
+    "moment": "^2.13.0",
     "vue": "^1.0.24",
+    "vue-focus": "^0.1.1",
     "vue-router": "^0.7.13",
     "vuex": "^0.6.3"
   },
