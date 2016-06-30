@@ -52,7 +52,7 @@
                     </form>
                     <div v-bind:class="{ 'hidden': !searchFocused }" class="searchResult">
                         <ul class="list-unstyled">
-                            <li class="result" v-for="result in searchResults | filterBy searchKeyword in 'name'">
+                            <li class="result" v-for="result in searchResults | filterBy searchKeyword in 'name' 'id' 'birthday'">
                                 <img src="assets/images/profile.png">
                                 <ul class="list-unstyled resultDetail">
                                     <li><strong>{{result.name}}</strong></li>
