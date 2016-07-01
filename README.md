@@ -1,4 +1,4 @@
-# ![Christ Medical Icon](static/images/ChristMedicalIcon32x32.png) Christ Medical
+# ![Christ Medical Icon](public/assets/images/ChristMedicalIcon32x32.png) Christ Medical
 # Install Steps
 1. npm install --global gulp
 2. npm install
