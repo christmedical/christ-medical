@@ -4,11 +4,9 @@
 2. npm install
 
 
-### Start local webserver
-gulp serve
-
-### To start watching files run:
-gulp watch
+### Build/Launch
+1. gulp serve -Serve files
+2. gulp watch -Watch for file changes and build
 
 
 ### To build Electron:
