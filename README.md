@@ -1,15 +1,15 @@
 # ![Christ Medical Icon](public/assets/images/ChristMedicalIcon32x32.png) Christ Medical
-# Install Steps
+### Install Steps
 1. npm install --global gulp
 2. npm install
 
 
-# Start local webserver
+### Start local webserver
 gulp serve
 
-# To start watching files run:
+### To start watching files run:
 gulp watch
 
 
-# To build Electron:
+### To build Electron:
 npm start
