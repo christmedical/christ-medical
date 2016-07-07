@@ -66,6 +66,10 @@
     display: block;
     text-decoration: none;
     color: #999999;
+    &.v-link-active{
+        color: #fff;
+        background: rgba(255,255,255,0.2);
+    }
 }
 
 .sidebar-nav li a:hover {

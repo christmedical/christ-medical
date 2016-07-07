@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="form-group col-md-3">
                             <label for="patientId">Patient ID</label>
-                            <input type="text" v-model="patient.id" class="form-control input-sm" id="patientId">
+                            <input type="text" v-model="patient.id" class="form-control input-sm" id="patientId" readonly>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="firstName">First Name</label>
@@ -160,7 +160,6 @@ export default {
             }
         },
         ready() {
-            debugger
         },
         vuex: {
             getters: {

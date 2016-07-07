@@ -52,7 +52,7 @@
                     </form>
                     <div v-bind:class="{ 'hidden': !searchKeyword }" class="searchResult">
                         <ul class="list-unstyled">
-                            <a v-link="{ path: '/patient/' + result.id }" v-for="result in searchResults | filterBy searchKeyword in 'firstName' 'lastName' 'id' 'birthday'">
+                            <a v-link="{ path: '/patient/' + result.id }" @click="patientClicked()" v-for="result in searchResults | filterBy searchKeyword in 'firstName' 'lastName' 'id' 'birthday'">
                                 <li class="result">
                                     <img src="/assets/images/profile.png">
                                     <ul class="list-unstyled resultDetail">
@@ -91,6 +91,9 @@ export default {
     methods: {
         search: function() {
 
+        },
+        patientClicked: function(){
+            this.searchKeyword = null;
         }
     },
     data() {
