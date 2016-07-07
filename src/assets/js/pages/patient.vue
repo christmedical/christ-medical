@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-lg-12">
             <ul class="nav nav-tabs">
-                <li role="presentation" v-bind:class="{ 'active': currentTab == 'patient-visit'}"><a href="javascript:void(0);" @click="setTab('patient-visit')">Overall</a></li>
+                <li role="presentation" v-bind:class="{ 'active': currentTab == 'patient-overview'}"><a href="javascript:void(0);" @click="setTab('patient-overview')">Overall</a></li>
                 <li role="presentation" v-bind:class="{ 'active': currentTab == 'patient-followups'}"><a href="javascript:void(0);" @click="setTab('patient-followups')">Followups</a></li>
                 <li role="presentation" v-bind:class="{ 'active': currentTab == 'patient-treatments'}"><a href="javascript:void(0);" @click="setTab('patient-treatments')">Treatments</a></li>
             </ul>
@@ -23,13 +23,15 @@
 
 <script>
 
-import PatientVisit from './patient-visit.vue';
+import PatientOverview from './patient-overview.vue';
 import PatientFollowups from './patient-followups.vue';
 import PatientTreatments from './patient-treatments.vue';
 
+import { setPatient } from '../vuex/actions'
+
 export default {
     components: {
-        'patient-visit': PatientVisit,
+        'patient-overview': PatientOverview,
         'patient-followups': PatientFollowups,
         'patient-treatments': PatientTreatments,
     },
@@ -40,9 +42,20 @@ export default {
     },
     data() {
         return {
-            currentTab: 'patient-visit'
+            currentTab: 'patient-overview'
         }
     },
+    route: {
+        data: function(transition) {
+            var patientId = parseInt(this.$route.params.patientId, 10);
+            this.setPatient(patientId);
+        }
+    },
+    vuex: {
+        actions: {
+            setPatient
+        }
+    }
 }
 
 </script>

@@ -7,12 +7,12 @@
 }
 
 .searchResult {
+    z-index: 999;
     position: absolute;
     width: 100%;
     padding: 0 15px;
     .result {
         background-color: $gray-lighter;
-        cursor: pointer;
         border: 1px solid $gray-base;
         padding: 8px 10px;
     }
@@ -50,21 +50,23 @@
                             </div>
                         </div>
                     </form>
-                    <div v-bind:class="{ 'hidden': !searchFocused }" class="searchResult">
+                    <div v-bind:class="{ 'hidden': !searchKeyword }" class="searchResult">
                         <ul class="list-unstyled">
-                            <li class="result" v-for="result in searchResults | filterBy searchKeyword in 'name' 'id' 'birthday'">
-                                <img src="assets/images/profile.png">
-                                <ul class="list-unstyled resultDetail">
-                                    <li><strong>{{result.name}}</strong></li>
-                                    <li class="small">{{result.birthday}} ({{ result.birthday | calculateAge }} years)</li>
-                                    <li class="small">{{result.gender}}</li>
-                                </ul>
-                                <ul class="list-unstyled rightDetail">
-                                    <li><strong>{{result.id}}</strong></li>
-                                    <li>&nbsp;</li>
-                                    <li><i class="fa fa-print" aria-hidden="true"></i></li>
-                                </ul>
-                            </li>
+                            <a v-link="{ path: '/patient/' + result.id }" v-for="result in searchResults | filterBy searchKeyword in 'firstName' 'lastName' 'id' 'birthday'">
+                                <li class="result">
+                                    <img src="/assets/images/profile.png">
+                                    <ul class="list-unstyled resultDetail">
+                                        <li><strong>{{result.firstName}} {{result.lastName}}</strong></li>
+                                        <li class="small">{{result.birthday}} ({{ result.birthday | calculateAge }} years)</li>
+                                        <li class="small">{{result.gender}}</li>
+                                    </ul>
+                                    <ul class="list-unstyled rightDetail">
+                                        <li><strong>{{result.id}}</strong></li>
+                                        <li>&nbsp;</li>
+                                        <li><i class="fa fa-print" aria-hidden="true"></i></li>
+                                    </ul>
+                                </li>
+                            </a>
                         </ul>
                     </div>
                 </li>
@@ -79,8 +81,13 @@
 
 import Moment from 'moment';
 import * as VueFocus from 'vue-focus';
+import {
+    searchPatients
+}
+from '../vuex/actions'
+import getters from '../vuex/getters'
 export default {
-    mixins: [ VueFocus.mixin ],
+    mixins: [VueFocus.mixin],
     methods: {
         search: function() {
 
@@ -89,33 +96,25 @@ export default {
     data() {
         return {
             searchFocused: false,
-            searchKeyword: null,
-            searchResults: [{
-                id: 1,
-                name: 'Tim',
-                birthday: '11/12/1999',
-                gender: 'Male'
-            }, {
-                id: 2,
-                name: 'Anna',
-                birthday: '11/12/1979',
-                gender: 'Female'
-            }, {
-                id: 3,
-                name: 'Smith',
-                birthday: '11/12/1989',
-                gender: 'Male'
-            }]
+            searchKeyword: null
         }
     },
     watch: {
         'searchKeyword': function(val, oldVal) {
-            //this.Search();
+            //this.searchResults = this.searchPatients(val);
         }
     },
     filters: {
         'calculateAge': function(birthday) {
             return Moment(birthday).month(0).from(Moment().month(0)).split(' ')[0]
+        }
+    },
+    vuex: {
+        actions: {
+            searchPatients
+        },
+        getters: {
+            searchResults: getters.getSearchResults
         }
     }
 }

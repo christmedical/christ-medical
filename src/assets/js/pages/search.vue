@@ -17,7 +17,17 @@ import MockUp from '../components/mock-up.vue'
 export default {
     components: {
         'mock-up': MockUp
-    }
+    },
+    route: {
+        data: function(transition) {
+            debugger
+            setTimeout(function() {
+                transition.next({
+                    message: 'data fetched!'
+                })
+            }, 1000)
+        }
+    },
 }
 
 </script>

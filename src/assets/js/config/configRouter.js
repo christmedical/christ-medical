@@ -15,7 +15,10 @@ export function configRouter(App) {
         '/search': {
             component: require('../pages/search.vue')
         },
-        '/patient': {
+        '/patient/': {
+            component: require('../pages/patient.vue')
+        },
+        '/patient/:patientId': {
             component: require('../pages/patient.vue')
         },
         '/followups': {
@@ -32,8 +35,18 @@ export function configRouter(App) {
         }
     });
 
-    router.afterEach(function(transition) {
+    router.beforeEach((transition) => {
         console.log('Successfully navigated to: ' + transition.to.path);
+        // if (transition.to.path === '/forbidden') {
+        //     router.app.authenticating = true
+        //     setTimeout(() => {
+        //         router.app.authenticating = false
+        //         alert('this route is forbidden by a global before hook')
+        //         transition.abort()
+        //     }, 3000)
+        // } else {
+            transition.next()
+        //}
     });
 
     router.start(App, 'html');
