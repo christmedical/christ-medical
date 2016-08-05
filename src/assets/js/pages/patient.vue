@@ -48,7 +48,11 @@ export default {
     route: {
         data: function(transition) {
             var patientId = parseInt(this.$route.params.patientId, 10);
-            this.setPatient(patientId);
+            if(patientId){
+                this.setPatient(patientId);
+            }else{
+                this.setPatient();
+            }
         }
     },
     vuex: {

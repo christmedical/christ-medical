@@ -18029,6 +18029,10 @@ exports.insert = function (css) {
 },{}],9:[function(require,module,exports){
 'use strict';
 
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 var _vue = require('vue');
 
 var _vue2 = _interopRequireDefault(_vue);
@@ -18043,25 +18047,36 @@ var _appNav = require('./components/app-nav.vue');
 
 var _appNav2 = _interopRequireDefault(_appNav);
 
-var _searchBar = require('./components/search-bar.vue');
+var _topBar = require('./components/top-bar.vue');
 
-var _searchBar2 = _interopRequireDefault(_searchBar);
+var _topBar2 = _interopRequireDefault(_topBar);
+
+var _vueFocus = require('vue-focus');
+
+var VueFocus = _interopRequireWildcard(_vueFocus);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+window.Moment = _moment2.default;
+
+_vue2.default.filter('calculateAge', require('./filters/calculateAge'));
+
 var App = _vue2.default.extend({
+    mixins: [VueFocus.mixin],
     store: _store2.default,
     ready: function ready() {},
 
     components: {
         'app-nav': _appNav2.default,
-        'search-bar': _searchBar2.default
+        'top-bar': _topBar2.default
     }
 });
 
 (0, _configRouter.configRouter)(App);
 
-},{"./components/app-nav.vue":10,"./components/search-bar.vue":13,"./config/configRouter":14,"./vuex/store":26,"vue":6}],10:[function(require,module,exports){
+},{"./components/app-nav.vue":10,"./components/top-bar.vue":13,"./config/configRouter":14,"./filters/calculateAge":15,"./vuex/store":27,"moment":1,"vue":6,"vue-focus":3}],10:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n\n\n")
 'use strict';
@@ -18091,7 +18106,7 @@ exports.default = {
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<div id=\"sidebar-wrapper\">\n    <ul class=\"sidebar-nav\">\n        <li class=\"sidebar-brand\"><a v-link=\"{ path: '/', exact: true, activeClass: 'brand-active' }\"> {{app.name}} </a></li>\n        <nav-btn href=\"search\" icon=\"search\" priority=\"\"></nav-btn>\n        <nav-btn href=\"patient\" icon=\"plus\" priority=\"\"></nav-btn>\n        <nav-btn href=\"followups\" icon=\"flag\" priority=\"\"></nav-btn>\n        <nav-btn href=\"reports\" icon=\"print\"></nav-btn>\n        <nav-btn href=\"sync\" icon=\"refresh\"></nav-btn>\n        <nav-btn href=\"settings\" icon=\"gears\"></nav-btn>\n    </ul>\n\n</div>"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<div id=\"sidebar-wrapper\">\n    <ul class=\"sidebar-nav\">\n        <li class=\"sidebar-brand\"><a v-link=\"{ path: '/', exact: true, activeClass: 'brand-active' }\"><img src=\"/assets/images/ChristMedicalIcon32x32.png\"> {{app.name}} </a></li>\n        <nav-btn href=\"search\" icon=\"search\" priority=\"\"></nav-btn>\n        <nav-btn href=\"patient\" icon=\"plus\" priority=\"\"></nav-btn>\n        <nav-btn href=\"followups\" icon=\"flag\" priority=\"\"></nav-btn>\n        <nav-btn href=\"reports\" icon=\"print\"></nav-btn>\n        <nav-btn href=\"sync\" icon=\"refresh\"></nav-btn>\n        <nav-btn href=\"settings\" icon=\"gears\"></nav-btn>\n    </ul>\n\n</div>"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -18106,7 +18121,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-2c7f6402", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../components/nav-btn.vue":12,"../vuex/getters":25,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],11:[function(require,module,exports){
+},{"../components/nav-btn.vue":12,"../vuex/getters":26,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],11:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n\n\n")
 'use strict';
@@ -18161,82 +18176,35 @@ if (module.hot) {(function () {  module.hot.accept()
 })()}
 },{"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],13:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
-var __vueify_style__ = __vueify_insert__.insert("/* line 4, stdin */\n.navbar-search[_v-16f78fb3] {\n  margin: -20px -20px 20px -20px;\n  background-color: #000; }\n\n/* line 9, stdin */\n.searchResult[_v-16f78fb3] {\n  z-index: 999;\n  position: absolute;\n  width: 100%;\n  padding: 0 15px; }\n  /* line 14, stdin */\n  .searchResult .result[_v-16f78fb3] {\n    background-color: #e6e6e6;\n    border: 1px solid #000;\n    padding: 8px 10px; }\n  /* line 19, stdin */\n  .searchResult .result[_v-16f78fb3]:hover {\n    background-color: #999999; }\n  /* line 22, stdin */\n  .searchResult .resultDetail[_v-16f78fb3] {\n    display: inline-block;\n    margin-left: 5px; }\n  /* line 26, stdin */\n  .searchResult .rightDetail[_v-16f78fb3] {\n    float: right; }\n  /* line 29, stdin */\n  .searchResult img[_v-16f78fb3] {\n    float: left;\n    width: 50px;\n    height: 50px; }\n")
-'use strict';
+var __vueify_style__ = __vueify_insert__.insert("/* line 4, stdin */\n.top-navbar[_v-6ba7dbb4] {\n  margin: -20px -20px 20px -20px;\n  background-color: #000; }\n")
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _moment = require('moment');
-
-var _moment2 = _interopRequireDefault(_moment);
-
-var _vueFocus = require('vue-focus');
-
-var VueFocus = _interopRequireWildcard(_vueFocus);
-
-var _actions = require('../vuex/actions');
-
-var _getters = require('../vuex/getters');
-
-var _getters2 = _interopRequireDefault(_getters);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 exports.default = {
-    mixins: [VueFocus.mixin],
-    methods: {
-        search: function search() {},
-        patientClicked: function patientClicked() {
-            this.searchKeyword = null;
-        }
-    },
+    methods: {},
     data: function data() {
-        return {
-            searchFocused: false,
-            searchKeyword: null
-        };
-    },
-
-    watch: {
-        'searchKeyword': function searchKeyword(val, oldVal) {
-            //this.searchResults = this.searchPatients(val);
-        }
-    },
-    filters: {
-        'calculateAge': function calculateAge(birthday) {
-            return (0, _moment2.default)(birthday).month(0).from((0, _moment2.default)().month(0)).split(' ')[0];
-        }
-    },
-    vuex: {
-        actions: {
-            searchPatients: _actions.searchPatients
-        },
-        getters: {
-            searchResults: _getters2.default.getSearchResults
-        }
+        return {};
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<nav class=\"navbar navbar-search\" _v-16f78fb3=\"\">\n    <div class=\"container-fluid\" _v-16f78fb3=\"\">\n        <div class=\"collapse navbar-collapse\" _v-16f78fb3=\"\">\n            <ul class=\"nav navbar-nav navbar-right\" _v-16f78fb3=\"\">\n                <li _v-16f78fb3=\"\">\n                    <form class=\"navbar-form\" role=\"search\" _v-16f78fb3=\"\">\n                        <div class=\"form-group\" _v-16f78fb3=\"\">\n                            <div class=\"input-group\" _v-16f78fb3=\"\">\n                                <input v-focus-model=\"searchFocused\" v-model=\"searchKeyword\" debounce=\"100\" type=\"text\" class=\"form-control\" placeholder=\"Search\" _v-16f78fb3=\"\">\n                                <div class=\"input-group-addon\" _v-16f78fb3=\"\"><i class=\"fa fa-search\" aria-hidden=\"true\" _v-16f78fb3=\"\"></i></div>\n                            </div>\n                        </div>\n                    </form>\n                    <div v-bind:class=\"{ 'hidden': !searchKeyword }\" class=\"searchResult\" _v-16f78fb3=\"\">\n                        <ul class=\"list-unstyled\" _v-16f78fb3=\"\">\n                            <a v-link=\"{ path: '/patient/' + result.id }\" @click=\"patientClicked()\" v-for=\"result in searchResults | filterBy searchKeyword in 'firstName' 'lastName' 'id' 'birthday'\" _v-16f78fb3=\"\">\n                                <li class=\"result\" _v-16f78fb3=\"\">\n                                    <img src=\"/assets/images/profile.png\" _v-16f78fb3=\"\">\n                                    <ul class=\"list-unstyled resultDetail\" _v-16f78fb3=\"\">\n                                        <li _v-16f78fb3=\"\"><strong _v-16f78fb3=\"\">{{result.firstName}} {{result.lastName}}</strong></li>\n                                        <li class=\"small\" _v-16f78fb3=\"\">{{result.birthday}} ({{ result.birthday | calculateAge }} years)</li>\n                                        <li class=\"small\" _v-16f78fb3=\"\">{{result.gender}}</li>\n                                    </ul>\n                                    <ul class=\"list-unstyled rightDetail\" _v-16f78fb3=\"\">\n                                        <li _v-16f78fb3=\"\"><strong _v-16f78fb3=\"\">{{result.id}}</strong></li>\n                                        <li _v-16f78fb3=\"\">&nbsp;</li>\n                                        <li _v-16f78fb3=\"\"><i class=\"fa fa-print\" aria-hidden=\"true\" _v-16f78fb3=\"\"></i></li>\n                                    </ul>\n                                </li>\n                            </a>\n                        </ul>\n                    </div>\n                </li>\n            </ul>\n        </div>\n    </div>\n</nav>\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<nav class=\"navbar top-navbar\" _v-6ba7dbb4=\"\">\n    <div class=\"container-fluid\" _v-6ba7dbb4=\"\">\n        <div class=\"collapse navbar-collapse\" _v-6ba7dbb4=\"\">\n            <ul class=\"nav navbar-nav navbar-right\" _v-6ba7dbb4=\"\">\n            </ul>\n        </div>\n    </div>\n</nav>\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.dispose(function () {
-    __vueify_insert__.cache["/* line 4, stdin */\n.navbar-search[_v-16f78fb3] {\n  margin: -20px -20px 20px -20px;\n  background-color: #000; }\n\n/* line 9, stdin */\n.searchResult[_v-16f78fb3] {\n  z-index: 999;\n  position: absolute;\n  width: 100%;\n  padding: 0 15px; }\n  /* line 14, stdin */\n  .searchResult .result[_v-16f78fb3] {\n    background-color: #e6e6e6;\n    border: 1px solid #000;\n    padding: 8px 10px; }\n  /* line 19, stdin */\n  .searchResult .result[_v-16f78fb3]:hover {\n    background-color: #999999; }\n  /* line 22, stdin */\n  .searchResult .resultDetail[_v-16f78fb3] {\n    display: inline-block;\n    margin-left: 5px; }\n  /* line 26, stdin */\n  .searchResult .rightDetail[_v-16f78fb3] {\n    float: right; }\n  /* line 29, stdin */\n  .searchResult img[_v-16f78fb3] {\n    float: left;\n    width: 50px;\n    height: 50px; }\n"] = false
+    __vueify_insert__.cache["/* line 4, stdin */\n.top-navbar[_v-6ba7dbb4] {\n  margin: -20px -20px 20px -20px;\n  background-color: #000; }\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-16f78fb3", module.exports)
+    hotAPI.createRecord("_v-6ba7dbb4", module.exports)
   } else {
-    hotAPI.update("_v-16f78fb3", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-6ba7dbb4", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../vuex/actions":24,"../vuex/getters":25,"moment":1,"vue":6,"vue-focus":3,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],14:[function(require,module,exports){
+},{"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18305,7 +18273,15 @@ function configRouter(App) {
     router.start(App, 'html');
 }
 
-},{"../pages/followups.vue":15,"../pages/patient.vue":19,"../pages/reports.vue":20,"../pages/search.vue":21,"../pages/settings.vue":22,"../pages/sync.vue":23,"vue":6,"vue-router":5}],15:[function(require,module,exports){
+},{"../pages/followups.vue":16,"../pages/patient.vue":20,"../pages/reports.vue":21,"../pages/search.vue":22,"../pages/settings.vue":23,"../pages/sync.vue":24,"vue":6,"vue-router":5}],15:[function(require,module,exports){
+'use strict';
+
+module.exports = function (birthday) {
+    debugger;
+    return Moment(birthday).month(0).from(Moment().month(0)).split(' ')[0];
+};
+
+},{}],16:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n\n\n")
 'use strict';
@@ -18341,7 +18317,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-7173b6f0", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../components/mock-up.vue":11,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],16:[function(require,module,exports){
+},{"../components/mock-up.vue":11,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],17:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n\n\n")
 'use strict';
@@ -18377,7 +18353,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-635abac0", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../components/mock-up.vue":11,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],17:[function(require,module,exports){
+},{"../components/mock-up.vue":11,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],18:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("/* line 3, stdin */\n.profilePic[_v-48270bb0] {\n  width: 100%;\n  margin-bottom: 5px; }\n\n/* line 8, stdin */\n.overviewWrapper[_v-48270bb0] {\n  margin-top: 10px; }\n")
 'use strict';
@@ -18390,22 +18366,39 @@ var _getters = require('../vuex/getters');
 
 var _getters2 = _interopRequireDefault(_getters);
 
+var _actions = require('../vuex/actions');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
     data: function data() {
         return {};
     },
+
+    methods: {
+        submitForm: function submitForm() {
+            debugger;
+            if (this.validateSavePatient()) {
+                this.savePatient();
+            }
+        },
+        validateSavePatient: function validateSavePatient() {
+            return true;
+        }
+    },
     ready: function ready() {},
 
     vuex: {
         getters: {
             patient: _getters2.default.getPatient
+        },
+        actions: {
+            savePatient: _actions.savePatient
         }
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<div class=\"row overviewWrapper\" _v-48270bb0=\"\">\n    <div class=\"col-md-2\" _v-48270bb0=\"\">\n        <img class=\"profilePic\" src=\"/assets/images/profile.png\" _v-48270bb0=\"\">\n        <button class=\"btn btn-primary btn-block\" _v-48270bb0=\"\">Print</button>\n        <button type=\"submit\" class=\"btn btn-default btn-block\" _v-48270bb0=\"\">Save</button>\n    </div>\n    <div class=\"col-md-10\" _v-48270bb0=\"\">\n        <form _v-48270bb0=\"\">\n            <div class=\"row\" _v-48270bb0=\"\">\n                <div class=\"col-md-10\" _v-48270bb0=\"\">\n                    <div class=\"row\" _v-48270bb0=\"\">\n                        <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                            <label for=\"patientId\" _v-48270bb0=\"\">Patient ID</label>\n                            <input type=\"text\" v-model=\"patient.id\" class=\"form-control input-sm\" id=\"patientId\" readonly=\"\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                            <label for=\"firstName\" _v-48270bb0=\"\">First Name</label>\n                            <input type=\"text\" v-model=\"patient.firstName\" class=\"form-control input-sm\" id=\"firstName\" placeholder=\"John\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                            <label for=\"lastName\" _v-48270bb0=\"\">Last Name</label>\n                            <input type=\"text\" v-model=\"patient.lastName\" class=\"form-control input-sm\" id=\"lastName\" placeholder=\"Doe\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                            <label for=\"lastName\" _v-48270bb0=\"\">DOB</label>\n                            <input type=\"date\" class=\"form-control input-sm\" id=\"dob\" _v-48270bb0=\"\">\n                        </div>\n                    </div>\n                    <div class=\"row\" _v-48270bb0=\"\">\n                        <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                            <label for=\"govId\" _v-48270bb0=\"\">Gov ID</label>\n                            <input type=\"text\" class=\"form-control input-sm\" id=\"govId\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                            <label for=\"nextOfKin\" _v-48270bb0=\"\">Next of Kin</label>\n                            <input type=\"text\" class=\"form-control input-sm\" id=\"nextOfKin\" placeholder=\"Rogers Smith\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                            <label for=\"gender\" _v-48270bb0=\"\">Gender</label>\n                            <select class=\"form-control input-sm\" _v-48270bb0=\"\">\n                                <option _v-48270bb0=\"\">Male</option>\n                                <option _v-48270bb0=\"\">Female</option>\n                            </select>\n                        </div>\n                        <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                            <label for=\"lastName\" _v-48270bb0=\"\">Marital Status</label>\n                            <select class=\"form-control input-sm\" _v-48270bb0=\"\">\n                                <option _v-48270bb0=\"\">Single</option>\n                                <option _v-48270bb0=\"\">Married</option>\n                                <option _v-48270bb0=\"\">Separated</option>\n                                <option _v-48270bb0=\"\">Divorced</option>\n                                <option _v-48270bb0=\"\">Widowed</option>\n                                <option _v-48270bb0=\"\">Common Law</option>\n                            </select>\n                        </div>\n                    </div>\n                    <div class=\"row\" _v-48270bb0=\"\">\n                        <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                            <label for=\"address\" _v-48270bb0=\"\">Address</label>\n                            <input type=\"text\" class=\"form-control input-sm\" id=\"address\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                            <label for=\"phone1\" _v-48270bb0=\"\">Phone 1</label>\n                            <input type=\"text\" class=\"form-control input-sm\" id=\"phone1\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                            <label for=\"phone2\" _v-48270bb0=\"\">Phone 2</label>\n                            <input type=\"text\" class=\"form-control input-sm\" id=\"phone2\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                            <label for=\"church\" _v-48270bb0=\"\">Church</label>\n                            <input type=\"text\" class=\"form-control input-sm\" id=\"church\" _v-48270bb0=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-md-2\" _v-48270bb0=\"\">\n                    <div class=\"checkbox\" _v-48270bb0=\"\">\n                        <label _v-48270bb0=\"\">\n                            <input type=\"checkbox\" value=\"translator\" _v-48270bb0=\"\"> Translator</label>\n                    </div>\n                    <div class=\"checkbox\" _v-48270bb0=\"\">\n                        <label _v-48270bb0=\"\">\n                            <input type=\"checkbox\" value=\"hope\" _v-48270bb0=\"\"> Hope</label>\n                    </div>\n                    <div class=\"checkbox\" _v-48270bb0=\"\">\n                        <label _v-48270bb0=\"\">\n                            <input type=\"checkbox\" value=\"smoke\" _v-48270bb0=\"\"> Smoke</label>\n                    </div>\n                    <div class=\"checkbox\" _v-48270bb0=\"\">\n                        <label _v-48270bb0=\"\">\n                            <input type=\"checkbox\" value=\"alcohol\" _v-48270bb0=\"\"> Alcohol</label>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\" _v-48270bb0=\"\">\n                <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                    <label for=\"medicineAllergies\" _v-48270bb0=\"\">Medicine Allergies</label>\n                    <textarea type=\"text\" class=\"form-control input-sm\" id=\"medicineAllergies\" rows=\"3\" _v-48270bb0=\"\"></textarea>\n                </div>\n                <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                    <label for=\"medicalHistory\" _v-48270bb0=\"\">Post Medical History</label>\n                    <textarea type=\"text\" class=\"form-control input-sm\" id=\"medicalHistory\" rows=\"3\" _v-48270bb0=\"\"></textarea>\n                </div>\n                <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                    <label for=\"postSurgeries\" _v-48270bb0=\"\">Post Surgeries</label>\n                    <textarea type=\"text\" class=\"form-control input-sm\" id=\"postSurgeries\" rows=\"3\" _v-48270bb0=\"\"></textarea>\n                </div>\n                <div class=\"form-group col-md-3\" _v-48270bb0=\"\">\n                    <label for=\"familyMedicalHistory\" _v-48270bb0=\"\">Family Medical History</label>\n                    <textarea type=\"text\" class=\"form-control input-sm\" id=\"familyMedicalHistory\" rows=\"3\" _v-48270bb0=\"\"></textarea>\n                </div>\n            </div>\n            <div class=\"row\" _v-48270bb0=\"\">\n                <div class=\"form-group col-md-4\" _v-48270bb0=\"\">\n                    <label for=\"lifeNotes\" _v-48270bb0=\"\">Personal Life Notes</label>\n                    <textarea type=\"text\" class=\"form-control input-sm\" id=\"lifeNotes\" rows=\"3\" _v-48270bb0=\"\"></textarea>\n                </div>\n                <div class=\"form-group col-md-4\" _v-48270bb0=\"\">\n                    <label for=\"adminNotes\" _v-48270bb0=\"\">Admin Notes</label>\n                    <textarea type=\"text\" class=\"form-control input-sm\" id=\"adminNotes\" rows=\"3\" _v-48270bb0=\"\"></textarea>\n                </div>\n                <div class=\"form-group col-md-2\" _v-48270bb0=\"\">\n                    <label for=\"gynG\" _v-48270bb0=\"\">GynG</label>\n                    <input type=\"text\" class=\"form-control input-sm\" id=\"gynG\" _v-48270bb0=\"\">\n                </div>\n                <div class=\"form-group col-md-2\" _v-48270bb0=\"\">\n                    <label for=\"gynP\" _v-48270bb0=\"\">GynP</label>\n                    <input type=\"text\" class=\"form-control input-sm\" id=\"gynP\" _v-48270bb0=\"\">\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<div class=\"row overviewWrapper\" _v-48270bb0=\"\">\n    <form v-on:submit.prevent=\"submitForm\" _v-48270bb0=\"\">\n        <div class=\"col-sm-2\" _v-48270bb0=\"\">\n            <img class=\"profilePic\" src=\"/assets/images/profile.png\" _v-48270bb0=\"\">\n            <button class=\"btn btn-primary btn-block\" _v-48270bb0=\"\">Print</button>\n            <button type=\"submit\" class=\"btn btn-default btn-block\" _v-48270bb0=\"\">Save</button>\n        </div>\n        <div class=\"col-sm-10\" _v-48270bb0=\"\">\n            <div class=\"row\" _v-48270bb0=\"\">\n                <div class=\"col-sm-10\" _v-48270bb0=\"\">\n                    <div class=\"row\" _v-48270bb0=\"\">\n                        <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                            <label for=\"patientId\" _v-48270bb0=\"\">Patient ID</label>\n                            <input type=\"text\" v-model=\"patient.id\" class=\"form-control input-sm\" id=\"patientId\" readonly=\"\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                            <label for=\"firstName\" _v-48270bb0=\"\">First Name</label>\n                            <input type=\"text\" v-model=\"patient.firstName\" class=\"form-control input-sm\" id=\"firstName\" placeholder=\"John\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                            <label for=\"lastName\" _v-48270bb0=\"\">Last Name</label>\n                            <input type=\"text\" v-model=\"patient.lastName\" class=\"form-control input-sm\" id=\"lastName\" placeholder=\"Doe\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                            <label for=\"lastName\" _v-48270bb0=\"\">DOB</label>\n                            <input type=\"date\" class=\"form-control input-sm\" id=\"dob\" _v-48270bb0=\"\">\n                        </div>\n                    </div>\n                    <div class=\"row\" _v-48270bb0=\"\">\n                        <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                            <label for=\"govId\" _v-48270bb0=\"\">Gov ID</label>\n                            <input type=\"text\" class=\"form-control input-sm\" id=\"govId\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                            <label for=\"nextOfKin\" _v-48270bb0=\"\">Next of Kin</label>\n                            <input type=\"text\" class=\"form-control input-sm\" id=\"nextOfKin\" placeholder=\"Rogers Smith\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                            <label for=\"gender\" _v-48270bb0=\"\">Gender</label>\n                            <select v-model=\"patient.gender\" class=\"form-control input-sm\" _v-48270bb0=\"\">\n                                <option _v-48270bb0=\"\">Male</option>\n                                <option _v-48270bb0=\"\">Female</option>\n                            </select>\n                        </div>\n                        <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                            <label for=\"lastName\" _v-48270bb0=\"\">Marital Status</label>\n                            <select class=\"form-control input-sm\" _v-48270bb0=\"\">\n                                <option _v-48270bb0=\"\">Single</option>\n                                <option _v-48270bb0=\"\">Married</option>\n                                <option _v-48270bb0=\"\">Separated</option>\n                                <option _v-48270bb0=\"\">Divorced</option>\n                                <option _v-48270bb0=\"\">Widowed</option>\n                                <option _v-48270bb0=\"\">Common Law</option>\n                            </select>\n                        </div>\n                    </div>\n                    <div class=\"row\" _v-48270bb0=\"\">\n                        <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                            <label for=\"address\" _v-48270bb0=\"\">Address</label>\n                            <input type=\"text\" class=\"form-control input-sm\" id=\"address\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                            <label for=\"phone1\" _v-48270bb0=\"\">Phone 1</label>\n                            <input type=\"text\" class=\"form-control input-sm\" id=\"phone1\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                            <label for=\"phone2\" _v-48270bb0=\"\">Phone 2</label>\n                            <input type=\"text\" class=\"form-control input-sm\" id=\"phone2\" _v-48270bb0=\"\">\n                        </div>\n                        <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                            <label for=\"church\" _v-48270bb0=\"\">Church</label>\n                            <input type=\"text\" class=\"form-control input-sm\" id=\"church\" _v-48270bb0=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-2\" _v-48270bb0=\"\">\n                    <div class=\"checkbox\" _v-48270bb0=\"\">\n                        <label _v-48270bb0=\"\">\n                            <input type=\"checkbox\" value=\"translator\" _v-48270bb0=\"\"> Translator</label>\n                    </div>\n                    <div class=\"checkbox\" _v-48270bb0=\"\">\n                        <label _v-48270bb0=\"\">\n                            <input type=\"checkbox\" value=\"hope\" _v-48270bb0=\"\"> Hope</label>\n                    </div>\n                    <div class=\"checkbox\" _v-48270bb0=\"\">\n                        <label _v-48270bb0=\"\">\n                            <input type=\"checkbox\" value=\"smoke\" _v-48270bb0=\"\"> Smoke</label>\n                    </div>\n                    <div class=\"checkbox\" _v-48270bb0=\"\">\n                        <label _v-48270bb0=\"\">\n                            <input type=\"checkbox\" value=\"alcohol\" _v-48270bb0=\"\"> Alcohol</label>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\" _v-48270bb0=\"\">\n                <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                    <label for=\"medicineAllergies\" _v-48270bb0=\"\">Medicine Allergies</label>\n                    <textarea type=\"text\" class=\"form-control input-sm\" id=\"medicineAllergies\" rows=\"3\" _v-48270bb0=\"\"></textarea>\n                </div>\n                <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                    <label for=\"medicalHistory\" _v-48270bb0=\"\">Post Medical History</label>\n                    <textarea type=\"text\" class=\"form-control input-sm\" id=\"medicalHistory\" rows=\"3\" _v-48270bb0=\"\"></textarea>\n                </div>\n                <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                    <label for=\"postSurgeries\" _v-48270bb0=\"\">Post Surgeries</label>\n                    <textarea type=\"text\" class=\"form-control input-sm\" id=\"postSurgeries\" rows=\"3\" _v-48270bb0=\"\"></textarea>\n                </div>\n                <div class=\"form-group col-sm-3\" _v-48270bb0=\"\">\n                    <label for=\"familyMedicalHistory\" _v-48270bb0=\"\">Family Medical History</label>\n                    <textarea type=\"text\" class=\"form-control input-sm\" id=\"familyMedicalHistory\" rows=\"3\" _v-48270bb0=\"\"></textarea>\n                </div>\n            </div>\n            <div class=\"row\" _v-48270bb0=\"\">\n                <div class=\"form-group col-sm-4\" _v-48270bb0=\"\">\n                    <label for=\"lifeNotes\" _v-48270bb0=\"\">Personal Life Notes</label>\n                    <textarea type=\"text\" class=\"form-control input-sm\" id=\"lifeNotes\" rows=\"3\" _v-48270bb0=\"\"></textarea>\n                </div>\n                <div class=\"form-group col-sm-4\" _v-48270bb0=\"\">\n                    <label for=\"adminNotes\" _v-48270bb0=\"\">Admin Notes</label>\n                    <textarea type=\"text\" class=\"form-control input-sm\" id=\"adminNotes\" rows=\"3\" _v-48270bb0=\"\"></textarea>\n                </div>\n                <div class=\"form-group col-sm-2\" _v-48270bb0=\"\">\n                    <label for=\"gynG\" _v-48270bb0=\"\">GynG</label>\n                    <input type=\"text\" class=\"form-control input-sm\" id=\"gynG\" _v-48270bb0=\"\">\n                </div>\n                <div class=\"form-group col-sm-2\" _v-48270bb0=\"\">\n                    <label for=\"gynP\" _v-48270bb0=\"\">GynP</label>\n                    <input type=\"text\" class=\"form-control input-sm\" id=\"gynP\" _v-48270bb0=\"\">\n                </div>\n            </div>\n        </div>\n    </form>\n</div>\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -18420,7 +18413,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-48270bb0", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../vuex/getters":25,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],18:[function(require,module,exports){
+},{"../vuex/actions":25,"../vuex/getters":26,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],19:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n\n\n")
 'use strict';
@@ -18456,7 +18449,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-ab88cf1c", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../components/mock-up.vue":11,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],19:[function(require,module,exports){
+},{"../components/mock-up.vue":11,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],20:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n\n\n")
 'use strict';
@@ -18501,7 +18494,11 @@ exports.default = {
     route: {
         data: function data(transition) {
             var patientId = parseInt(this.$route.params.patientId, 10);
-            this.setPatient(patientId);
+            if (patientId) {
+                this.setPatient(patientId);
+            } else {
+                this.setPatient();
+            }
         }
     },
     vuex: {
@@ -18526,7 +18523,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-4a27fee6", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../vuex/actions":24,"./patient-followups.vue":16,"./patient-overview.vue":17,"./patient-treatments.vue":18,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],20:[function(require,module,exports){
+},{"../vuex/actions":25,"./patient-followups.vue":17,"./patient-overview.vue":18,"./patient-treatments.vue":19,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],21:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n\n\n")
 'use strict';
@@ -18562,34 +18559,53 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-1d2c78a0", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../components/mock-up.vue":11,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],21:[function(require,module,exports){
+},{"../components/mock-up.vue":11,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],22:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
-var __vueify_style__ = __vueify_insert__.insert("\n\n\n\n")
+var __vueify_style__ = __vueify_insert__.insert("/* line 5, stdin */\n.searchResult .result[_v-0fff0952] {\n  background-color: #e6e6e6;\n  border: 1px solid #000;\n  padding: 8px 10px;\n  margin-bottom: 10px; }\n\n/* line 11, stdin */\n.searchResult .result[_v-0fff0952]:hover {\n  background-color: #999999; }\n\n/* line 14, stdin */\n.searchResult .leftDetail[_v-0fff0952] {\n  display: inline-block;\n  margin-left: 5px; }\n\n/* line 18, stdin */\n.searchResult .rightDetail[_v-0fff0952] {\n  float: right; }\n\n/* line 21, stdin */\n.searchResult img[_v-0fff0952] {\n  float: left;\n  width: 50px;\n  height: 50px; }\n")
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _mockUp = require('../components/mock-up.vue');
+var _vueFocus = require('vue-focus');
 
-var _mockUp2 = _interopRequireDefault(_mockUp);
+var VueFocus = _interopRequireWildcard(_vueFocus);
+
+var _actions = require('../vuex/actions');
+
+var _getters = require('../vuex/getters');
+
+var _getters2 = _interopRequireDefault(_getters);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 exports.default = {
-    components: {
-        'mock-up': _mockUp2.default
+    mixins: [VueFocus.mixin],
+    methods: {},
+    data: function data() {
+        return {};
+    },
+
+    vuex: {
+        actions: {
+            searchPatients: _actions.searchPatients
+        },
+        getters: {
+            searchPage: _getters2.default.getSearchPage
+        }
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<mock-up src=\"mock-search.png\">\n</mock-up>\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<div class=\"row\" _v-0fff0952=\"\">\n    <div class=\"col-sm-12\" _v-0fff0952=\"\">\n        <form _v-0fff0952=\"\">\n            <div class=\"form-group\" _v-0fff0952=\"\">\n                <input type=\"text\" v-focus-auto=\"\" v-model=\"searchPage.searchValue\" @keyup=\"searchPatients | debounce 500\" class=\"form-control\" placeholder=\"Search on Patient ID or Name\" _v-0fff0952=\"\">\n            </div>\n        </form>\n        <ul class=\"list-unstyled searchResult\" _v-0fff0952=\"\">\n            <a v-link=\"{ path: '/patient/' + result.id }\" v-for=\"result in searchPage.searchResult\" _v-0fff0952=\"\">\n                <li class=\"result\" _v-0fff0952=\"\">\n                    <img src=\"/assets/images/profile.png\" _v-0fff0952=\"\">\n                    <ul class=\"list-unstyled leftDetail\" _v-0fff0952=\"\">\n                        <li _v-0fff0952=\"\"><strong _v-0fff0952=\"\">{{result.firstName}} {{result.lastName}}</strong></li>\n                        <li class=\"small\" _v-0fff0952=\"\">{{result.birthday}} ({{ result.birthday | calculateAge }} years)</li>\n                        <li class=\"small\" _v-0fff0952=\"\">{{result.gender}}</li>\n                    </ul>\n                    <ul class=\"list-unstyled rightDetail\" _v-0fff0952=\"\">\n                        <li _v-0fff0952=\"\"><strong _v-0fff0952=\"\">{{result.id}}</strong></li>\n                        <li _v-0fff0952=\"\">&nbsp;</li>\n                        <li _v-0fff0952=\"\"><i class=\"fa fa-print\" aria-hidden=\"true\" _v-0fff0952=\"\"></i></li>\n                    </ul>\n                </li>\n            </a>\n        </ul>\n    </div>\n</div>\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.dispose(function () {
-    __vueify_insert__.cache["\n\n\n\n"] = false
+    __vueify_insert__.cache["/* line 5, stdin */\n.searchResult .result[_v-0fff0952] {\n  background-color: #e6e6e6;\n  border: 1px solid #000;\n  padding: 8px 10px;\n  margin-bottom: 10px; }\n\n/* line 11, stdin */\n.searchResult .result[_v-0fff0952]:hover {\n  background-color: #999999; }\n\n/* line 14, stdin */\n.searchResult .leftDetail[_v-0fff0952] {\n  display: inline-block;\n  margin-left: 5px; }\n\n/* line 18, stdin */\n.searchResult .rightDetail[_v-0fff0952] {\n  float: right; }\n\n/* line 21, stdin */\n.searchResult img[_v-0fff0952] {\n  float: left;\n  width: 50px;\n  height: 50px; }\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
@@ -18598,7 +18614,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-0fff0952", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../components/mock-up.vue":11,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],22:[function(require,module,exports){
+},{"../vuex/actions":25,"../vuex/getters":26,"vue":6,"vue-focus":3,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],23:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n\n\n")
 'use strict';
@@ -18634,7 +18650,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-5171b292", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../components/mock-up.vue":11,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],23:[function(require,module,exports){
+},{"../components/mock-up.vue":11,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],24:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n\n\n")
 'use strict';
@@ -18670,46 +18686,46 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-bf994eec", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../components/mock-up.vue":11,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],24:[function(require,module,exports){
+},{"../components/mock-up.vue":11,"vue":6,"vue-hot-reload-api":4,"vueify/lib/insert-css":7}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var setApp = exports.setApp = function setApp(_ref, app) {
+var searchPatients = exports.searchPatients = function searchPatients(_ref) {
     var dispatch = _ref.dispatch;
 
-    dispatch('SET_APP', app);
+    dispatch('SEARCH_PATIENTS');
 };
 
-var searchPatients = exports.searchPatients = function searchPatients(_ref2, searchKeyword) {
+var setPatient = exports.setPatient = function setPatient(_ref2, patientId) {
     var dispatch = _ref2.dispatch;
-
-    dispatch('SEARCH_PATIENTS', searchKeyword);
-};
-
-var setPatient = exports.setPatient = function setPatient(_ref3, patientId) {
-    var dispatch = _ref3.dispatch;
 
     dispatch('SET_PATIENT', patientId);
 };
 
-},{}],25:[function(require,module,exports){
+var savePatient = exports.savePatient = function savePatient(_ref3) {
+    var dispatch = _ref3.dispatch;
+
+    dispatch('SAVE_PATIENT');
+};
+
+},{}],26:[function(require,module,exports){
 "use strict";
 
 module.exports = {
     getApp: function getApp(state) {
         return state.app;
     },
-    getSearchResults: function getSearchResults(state) {
-        return state.patients.searchResult;
+    getSearchPage: function getSearchPage(state) {
+        return state.searchPage;
     },
     getPatient: function getPatient(state) {
         return state.patient;
     }
 };
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18732,39 +18748,50 @@ var state = {
     app: {
         name: 'Christ Medical'
     },
-    patients: {
-        searchResult: [{
-            id: 1,
-            firstName: 'Tim',
-            lastName: 'Lel',
-            birthday: '11/12/1999',
-            gender: 'Male'
-        }, {
-            id: 2,
-            firstName: 'Anna',
-            lastName: 'Roger',
-            birthday: '11/12/1979',
-            gender: 'Female'
-        }, {
-            id: 3,
-            firstName: 'John',
-            lastName: 'Smith',
-            birthday: '11/12/1989',
-            gender: 'Male'
-        }]
+    searchPage: {
+        searchResult: [],
+        searchValue: null
     },
-    patient: {}
+    patient: {},
+    demoPatients: [{
+        id: 1,
+        firstName: 'Tim',
+        lastName: 'Lel',
+        birthday: '11/12/1999',
+        gender: 'Male'
+    }, {
+        id: 2,
+        firstName: 'Anna',
+        lastName: 'Roger',
+        birthday: '11/12/1979',
+        gender: 'Female'
+    }, {
+        id: 3,
+        firstName: 'John',
+        lastName: 'Smith',
+        birthday: '11/12/1989',
+        gender: 'Male'
+    }]
 };
 
 var mutations = {
-    SET_APP: function SET_APP(state, app) {
-        state.app.name = app.name;
-    },
-    SEARCH_PATIENTS: function SEARCH_PATIENTS(state, searchKeyword) {
-        //state.patients.searchResult = patientsFromDB;
+    SEARCH_PATIENTS: function SEARCH_PATIENTS(state) {
+        state.searchPage.searchValue = state.searchPage.searchValue.toLowerCase();
+        //Go to DB and do query
+        state.searchPage.searchResult = state.demoPatients.filter(function (patient) {
+            return patient.firstName.toLowerCase().startsWith(state.searchPage.searchValue) || patient.lastName.toLowerCase().startsWith(state.searchPage.searchValue) || patient.id === state.searchPage.searchValue;
+        });
     },
     SET_PATIENT: function SET_PATIENT(state, patientId) {
-        state.patient = state.patients.searchResult[patientId - 1];
+        if (patientId) {
+            state.patient = state.demoPatients[patientId - 1];
+        } else {
+            state.patient = {};
+        }
+    },
+    SAVE_PATIENT: function SAVE_PATIENT(state) {
+        //Save to DB
+        state.demoPatients.push(state.patient);
     }
 };
 

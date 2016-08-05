@@ -2,8 +2,8 @@ module.exports = {
     getApp: function(state) {
         return state.app;
     },
-    getSearchResults: function(state) {
-        return state.patients.searchResult;
+    getSearchPage: function(state) {
+        return state.searchPage;
     },
     getPatient: function(state) {
         return state.patient;

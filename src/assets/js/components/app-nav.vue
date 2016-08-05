@@ -8,7 +8,7 @@
 
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
-        <li class="sidebar-brand"><a v-link="{ path: '/', exact: true, activeClass: 'brand-active' }"> {{app.name}} </a></li>
+        <li class="sidebar-brand"><a v-link="{ path: '/', exact: true, activeClass: 'brand-active' }"><img src="/assets/images/ChristMedicalIcon32x32.png"> {{app.name}} </a></li>
         <nav-btn href="search" icon="search" priority></nav-btn>
         <nav-btn href="patient" icon="plus" priority></nav-btn>
         <nav-btn href="followups" icon="flag" priority></nav-btn>
