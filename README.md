@@ -1,13 +1,40 @@
 # ![Christ Medical Icon](public/assets/images/ChristMedicalIcon32x32.png) Christ Medical
-### Install Steps
-1. npm install --global gulp
-2. npm install
+
+## Getting Started   
+
+### Install Steps      
+```
+$ npm install --global gulp
+$ npm install
+```
 
 
-### Build/Launch
-1. gulp serve -Serve files
-2. gulp watch -Watch for file changes and build
+### Build/Launch  
+
+Serve files locally:
+
+```
+$ gulp serve
+```
+
+Serve files locally & watch for file changes and re-build:   
+
+```
+$ gulp watch
+```
 
 
-### To build Electron:
-npm start
+### Build as an Electron:
+```
+$ npm start
+```
+
+## Contributing
+
+### We use the Git Flow [Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)   
+What is [Git Flow](https://github.com/nvie/gitflow)?
+You need to [install](https://github.com/nvie/gitflow/wiki/Installation) locally to use it
+```
+$ brew install git-flow
+$ git flow init -d
+```
